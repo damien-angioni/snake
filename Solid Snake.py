@@ -34,8 +34,6 @@ def metal_snake(snake_list):
             fenetre.blit(carton, [snake_list[i][0], snake_list[i][1],50,50])
         i += 1
 def Defeat():
-    pygame.mixer.Sound.play(pygame.mixer.Sound("Resources/death.mp3"))
-    pygame.mixer.music.stop()
     msgl1 = font_style.render("Snake? Snake? ... SNAKE! vous avez perdu!", True, [0,0,0])
     msgl2 = font_style.render(" [esc] pour quiter [enter] pour rejouer",True,[0,0,0])
     fenetre.blit(msgl1, [50,800/2])
@@ -58,7 +56,6 @@ def gameLoop():
             fenetre.blit( BGrnd,(0,0))
             Defeat()
             pygame.display.update()
- 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
@@ -83,6 +80,8 @@ def gameLoop():
                     y1_change = 50
                     x1_change = 0
         if x1 >= 1100 or x1 < 0 or y1 >= 800 or y1 < 0:
+            pygame.mixer.Sound.play(pygame.mixer.Sound("Resources/death.mp3"))
+            pygame.mixer.music.stop()
             game_close = True
         x1 += x1_change
         y1 += y1_change
